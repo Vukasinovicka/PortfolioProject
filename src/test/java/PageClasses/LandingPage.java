@@ -1,10 +1,11 @@
 package PageClasses;
 
-import baseClasses.PageBaseClass;
+import BaseClasses.PageBaseClass;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -33,7 +34,4 @@ public class LandingPage extends PageBaseClass {
 
 
     }
-
-
-
 }

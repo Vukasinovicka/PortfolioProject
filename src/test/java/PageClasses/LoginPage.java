@@ -1,12 +1,9 @@
 package PageClasses;
 
-import baseClasses.PageBaseClass;
-import baseClasses.TopMeniClass;
+import BaseClasses.PageBaseClass;
+import BaseClasses.TopMeniClass;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends PageBaseClass {
@@ -18,7 +15,7 @@ public class LoginPage extends PageBaseClass {
         topMeniClass = new TopMeniClass(driver,logger);
         PageFactory.initElements(driver, topMeniClass);
     }
-  //  public RediffMailPage doLogin(){
+    //  public RediffMailPage doLogin(){
 
     //return PageFactory.initElements(driver, RediffMailPage.class);
     // return new LoginPage();
@@ -29,7 +26,4 @@ public class LoginPage extends PageBaseClass {
     public void getTitle(){
 
     }
-
-
-
 }

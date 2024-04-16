@@ -1,7 +1,7 @@
 package PageClasses;
 
-import baseClasses.PageBaseClass;
-import baseClasses.TopMeniClass;
+import BaseClasses.PageBaseClass;
+import BaseClasses.TopMeniClass;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
@@ -15,225 +15,228 @@ import java.util.List;
 
 public class MyPorfolioPage extends PageBaseClass {
 
-    public TopMeniClass topMeniClass;
+    public TopMeniClass topmenu;
 
     public MyPorfolioPage(WebDriver driver, ExtentTest logger) {
-        super(driver,logger);
-        topMeniClass = new TopMeniClass(driver,logger);
-        PageFactory.initElements(driver,topMeniClass);
+        super(driver, logger);
+        topmenu = new TopMeniClass(driver, logger);
+        PageFactory.initElements(driver, topmenu);
     }
 
-    @FindBy(xpath = "//*[@id=\"headcontent\"]/div[1]/div[1]/a/span")
+    @FindBy(xpath="//*[@id='headcontent']/div[1]/div[1]/a/span")
     public WebElement moneyBiz_text;
 
-    @FindBy(id = "createPortfolio")
-    public WebElement createPortfolio;
+    @FindBy(id="createPortfolio")
+    public WebElement createPortfolio_Btn;
 
-    @FindBy(id = "create")
-    public WebElement createportfolio_textBox;
+    @FindBy(id="create")
+    public WebElement createportfolio_textbox;
 
-    @FindBy(id = "createPortfolioButton")
-    public WebElement createPortfolioButton;
+    @FindBy(id="createPortfolioButton")
+    public WebElement submitCreatePortfolio_Btn;
 
-    @FindBy(id = "portfolioid")
+    @FindBy(id="portfolioid")
     public WebElement myPortfolioList;
 
-    @FindBy(id = "deletePortfolio")
-    public WebElement deletePortfolioButton;
+    @FindBy(id="deletePortfolio")
+    public WebElement deletePortfolio_Btn;
 
-    @FindBy(id = "addStock")
-    public WebElement addStockButton;
+    @FindBy(id="addStock")
+    public WebElement addStock_Btn;
 
-    @FindBy(id = "addstockname")
-    public WebElement stockNameTextBox;
+    @FindBy(id="addstockname")
+    public WebElement stockName_TextBox;
 
-    @FindBy(xpath = "//*[@id=\"ajax_listOfOptions\"]/div[1]")
+    @FindBy(xpath="//*[@id='ajax_listOfOptions']/div[1]")
     public WebElement stockValue;
 
-    @FindBy(id = "addstockqty")
-    public WebElement stockQualitityTextBox;
+    @FindBy(id="addstockqty")
+    public WebElement stockQualitity_txtBox;
 
-    @FindBy(id = "addstockprice")
-    public WebElement stockPurchasePrice;
+    @FindBy(id="addstockprice")
+    public WebElement stockPrice_TxtBox;
 
-    @FindBy(id = "addStockButton")
-    public WebElement submitAddStock;
+    @FindBy(id="addStockButton")
+    public WebElement submitStock_Btn;
 
-    @FindBy(id= "stock")
-    public WebElement stockTable;
+    @FindBy(id="stock")
+    public WebElement StockTable;
 
-    @FindBy(id = "stockPurchaseDate")
+    @FindBy(id="stockPurchaseDate")
     public WebElement stockPurchaseDate;
 
-    public void clickPurchaseDate(){
+
+    public void clickStockPurchaseCalendar(){
+
         try {
             stockPurchaseDate.click();
-            logger.log(Status.PASS, "Clicked Purchase Date");
-        }catch (Exception e){
+            logger.log(Status.PASS, "Clicked the Stock purchase Calendar");
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
     }
 
-
-    public MyPorfolioPage clickSubmitAddStockButton(){
+    public MyPorfolioPage submitStock(){
         try {
-            submitAddStock.click();
-            logger.log(Status.PASS, "Clicked Add Stock Button");
-        }catch (Exception e){
+            submitStock_Btn.click();
+            logger.log(Status.PASS, "Submitted the Stock");
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
-        MyPorfolioPage myPorfolioPage = new MyPorfolioPage(driver,logger);
-        PageFactory.initElements(driver,myPorfolioPage);
-        return myPorfolioPage;
+        MyPorfolioPage myportfolio = new MyPorfolioPage(driver, logger);
+        PageFactory.initElements(driver, myportfolio);
+        return myportfolio;
     }
 
-    public void verifyStock(String stockName){
-        boolean flag = false;
+    public void verifyStock(String StockName){
+        boolean flag= false;
         try {
-            List<WebElement> tableRows = stockTable.findElements(By.xpath("/tbody/tr"));
+            List<WebElement> tableRows = StockTable.findElements(By.xpath("/tbody/tr"));
 
-            for (WebElement rows : tableRows){
-                List<WebElement> tableColumns = rows.findElements(By.tagName("td"));
+            for (WebElement row : tableRows) {
+                List<WebElement> tableColumsn = row.findElements(By.tagName("td"));
 
-                for (WebElement column : tableColumns) {
-                    if (column.getText().equalsIgnoreCase(stockName)){
-                        flag = true;
-
+                for (WebElement column : tableColumsn) {
+                    if(column.getText().equalsIgnoreCase(StockName)){
+                        flag=true;
                     }
                 }
             }
-           Assert.assertTrue(flag, "GivenStock :" + stockName + "is not present in this Portfolio");
-            logger.log(Status.PASS, "GivenStock :" + stockName + "is not present in this Portfolio");
-        }catch (Exception e){
+            Assert.assertTrue(flag, "Given Stock : " +StockName + " is not present in this Portfolio");
+            logger.log(Status.PASS, "Given Stock : " +StockName + " is not present in this Portfolio");
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
+
     }
 
-    public void enterStockPurchasePrice(String purchasePrice) {
+
+    public void enterStockPrice(String stockPrice){
         try {
-            stockPurchasePrice.sendKeys(purchasePrice);
-            logger.log(Status.PASS, "Add the Purchase Price :" + purchasePrice);
+            stockPrice_TxtBox.sendKeys(stockPrice);
+            logger.log(Status.PASS, "Entered the Price : " + stockPrice);
         } catch (Exception e) {
             reportFail(e.getMessage());
         }
     }
 
-    public void enterStockQuantity(String quantity) {
+
+    public void enterStockQuantity(String quantity){
         try {
-            stockQualitityTextBox.sendKeys(quantity);
-            logger.log(Status.PASS, "Add the Quantity :" + quantity);
+            stockQualitity_txtBox.sendKeys(quantity);
+            logger.log(Status.PASS, "Add the Quantity : " + quantity);
         } catch (Exception e) {
             reportFail(e.getMessage());
         }
     }
+
     public void enterStockName(String stockName){
         try {
-            stockNameTextBox.sendKeys(stockName);
+            stockName_TextBox.sendKeys(stockName);
             waitForPageLoad();
             stockValue.click();
-            logger.log(Status.PASS,"Typed Stock Name :" + stockName);
-        }catch (Exception e){
+            logger.log(Status.PASS, "Typed Stock Name : " + stockName);
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
     }
 
-
-    public void clickAddStockButton(){
+    public void clickAddStock(){
         try {
-            addStockButton.click();
-            logger.log(Status.PASS,"Clicked on Add Stock Button");
-        }catch (Exception e){
-            reportFail(e.getMessage());
+            addStock_Btn.click();
+            logger.log(Status.PASS, "Clicked the Add Stock Button");
+        } catch (Exception e) {
+            reportFail(e.getMessage());;
         }
     }
 
-    public MyPorfolioPage deletePortfolio(){
+    public MyPorfolioPage deletePortFolio(){
         try {
-            deletePortfolioButton.click();
+            deletePortfolio_Btn.click();
             acceptAlert();
             logger.log(Status.PASS, "Deleted the Portfolio");
-        }catch (Exception e){
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
-        MyPorfolioPage myPorfolioPage = new MyPorfolioPage(driver,logger);
-        PageFactory.initElements(driver,myPorfolioPage);
-        return myPorfolioPage;
-
+        MyPorfolioPage myportfolio = new MyPorfolioPage(driver, logger);
+        PageFactory.initElements(driver, myportfolio);
+        return myportfolio;
     }
 
     public MyPorfolioPage selectPortfolio(String Value){
         selectDropDownValue(myPortfolioList, Value);
-        MyPorfolioPage myPorfolioPage = new MyPorfolioPage(driver,logger);
-        PageFactory.initElements(driver,myPorfolioPage);
-        return myPorfolioPage;
+        MyPorfolioPage myportfolio = new MyPorfolioPage(driver, logger);
+        PageFactory.initElements(driver, myportfolio);
+        return myportfolio;
     }
 
-
-
-    public void isPortfolioExisted(String portfolioName){
+    public void isPorfolioExists(String portfolio){
         boolean flag = false;
         try {
             List<WebElement> allOptions = getAllElementsOfDropDown(myPortfolioList);
             for (WebElement option : allOptions) {
-                if (option.getText().equalsIgnoreCase(portfolioName)){
-                    flag= true;
-                }else {
-                    flag= false;
+                if (option.getText().equalsIgnoreCase(portfolio)){
+                    flag=true;
+                }else{
+                    flag = false;
                 }
             }
             Assert.assertTrue(flag);
-            logger.log(Status.PASS, "Given Portfolio : " + portfolioName + "Present in Portfolio List");
-        }catch (Exception e){
+            logger.log(Status.PASS, "Given Portfolio : " + portfolio + " , Present in Portfolio List");
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
     }
 
-    public void isPortfolioDeleted(String portfolioName){
+
+    public void isPorfolioDeleted(String portfolio){
         boolean flag = false;
         try {
             List<WebElement> allOptions = getAllElementsOfDropDown(myPortfolioList);
             for (WebElement option : allOptions) {
-                if (!option.getText().equalsIgnoreCase(portfolioName)){
-                    flag= true;
-                }else {
-                    flag= false;
+                if (!option.getText().equalsIgnoreCase(portfolio)){
+                    flag=true;
+                }else{
+                    flag = false;
                 }
             }
             Assert.assertTrue(flag);
-            logger.log(Status.PASS, "Given Portfolio : " + portfolioName + "is not Present in Portfolio List");
-        }catch (Exception e){
+            logger.log(Status.PASS, "Given Portfolio : " + portfolio + " , is not Prsent in Portfolio List");
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
     }
 
     public MyPorfolioPage submitPortfolio(){
         try {
-            createPortfolioButton.click();
-            logger.log(Status.PASS,"Clicked the create portfolo button");
-        }catch (Exception e){
+            submitCreatePortfolio_Btn.click();
+            logger.log(Status.PASS, "Submitted the Portfolio");
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
-        MyPorfolioPage myPorfolioPage = new MyPorfolioPage(driver,logger);
-        PageFactory.initElements(driver,myPorfolioPage);
-        return myPorfolioPage;
+
+        MyPorfolioPage myportfolio = new MyPorfolioPage(driver, logger);
+        PageFactory.initElements(driver, myportfolio);
+        return myportfolio;
+
     }
 
-    public void enterPotrfolioName(String portfolioName){
+    public void enterPortfolioName(String portfolioName){
         try {
-            createportfolio_textBox.clear();
-            createportfolio_textBox.sendKeys(portfolioName);
-            logger.log(Status.PASS,"Entered Portfolio Name : " + portfolioName);
-        }catch (Exception e) {
+            createportfolio_textbox.clear();
+            createportfolio_textbox.sendKeys(portfolioName);
+            logger.log(Status.PASS, "Entered Portfolio Name : " + portfolioName);
+        } catch (Exception e) {
             reportFail(e.getMessage());
-
         }
     }
+
 
     public void clickCreatePortfolio(){
         try {
-            createPortfolio.click();
+            createPortfolio_Btn.click();
             logger.log(Status.PASS, "Clicked the Create Portfolio Button");
-        }catch (Exception e){
+        } catch (Exception e) {
             reportFail(e.getMessage());
         }
     }
@@ -241,9 +244,9 @@ public class MyPorfolioPage extends PageBaseClass {
     public void verifyMoneyBiz(){
         moneyBiz_text.isDisplayed();
     }
-    public TopMeniClass getTopMeniClass(){
 
-        return topMeniClass;
+    public TopMeniClass gettopMenu(){
+        return topmenu;
     }
 
 }

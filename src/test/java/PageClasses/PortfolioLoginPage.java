@@ -1,7 +1,7 @@
 package PageClasses;
 
-import baseClasses.PageBaseClass;
-import baseClasses.TopMeniClass;
+import BaseClasses.PageBaseClass;
+import BaseClasses.TopMeniClass;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
@@ -12,13 +12,12 @@ import org.testng.Assert;
 
 public class PortfolioLoginPage extends PageBaseClass {
 
-    public TopMeniClass topMeniClass;
-
+    public TopMeniClass topmenu;
 
     public PortfolioLoginPage(WebDriver driver, ExtentTest logger) {
         super(driver, logger);
-        topMeniClass = new TopMeniClass(driver, logger);
-        PageFactory.initElements(driver, topMeniClass);
+        topmenu = new TopMeniClass(driver, logger);
+        PageFactory.initElements(driver, topmenu);
     }
 
     @FindBy(id = "useremail")
@@ -82,9 +81,6 @@ public class PortfolioLoginPage extends PageBaseClass {
     public void verifyMessage(){
         verifyElementIsDisplayed(errorMessage);
     }
-
-
-
 
 
 }

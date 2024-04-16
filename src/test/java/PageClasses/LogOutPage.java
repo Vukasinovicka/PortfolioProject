@@ -1,7 +1,7 @@
 package PageClasses;
 
-import baseClasses.PageBaseClass;
-import baseClasses.TopMeniClass;
+import BaseClasses.PageBaseClass;
+import BaseClasses.TopMeniClass;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
